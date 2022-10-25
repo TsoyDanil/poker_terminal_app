@@ -19,12 +19,15 @@ class Deck {
             }
         }
     }
-    showDeck = (): void => {
+    showDeck(): void {
         console.log(this.cardsInDeck)
     }
-    // mixDeck = (): void => {
-    //     this.cardsInDeck.sort(() => Math.random() -0.5)
-    // }
+    giveCard(): Card {
+        let randNum: number = Math.floor(Math.random()*this.cardsInDeck.length)
+        const cardHolder: Card = this.cardsInDeck[randNum]
+        this.cardsInDeck.splice(randNum, 1)
+        return cardHolder
+    }
     mixDeck(): void {
         this.cardsInDeck.sort(() => Math.random() -0.5)
     }
@@ -34,7 +37,4 @@ const deck = new Deck()
 deck.showDeck()
 deck.mixDeck()
 deck.showDeck()
-console.log('____________________________')
-deck.mixDeck()
-deck.showDeck()
-console.log('_____________________________');
+
