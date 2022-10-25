@@ -15,7 +15,6 @@ class Deck {
         for (let i = 0; i < ranks.length; i++){
             for (let j = 0; j < suits.length; j++){
                 const card = new Card(ranks[i], suits[j])
-                console.log(card)
                 this.cardsInDeck.push(card)
             }
         }
@@ -23,7 +22,19 @@ class Deck {
     showDeck = (): void => {
         console.log(this.cardsInDeck)
     }
+    // mixDeck = (): void => {
+    //     this.cardsInDeck.sort(() => Math.random() -0.5)
+    // }
+    mixDeck(): void {
+        this.cardsInDeck.sort(() => Math.random() -0.5)
+    }
 }
 
 const deck = new Deck()
 deck.showDeck()
+deck.mixDeck()
+deck.showDeck()
+console.log('____________________________')
+deck.mixDeck()
+deck.showDeck()
+console.log('_____________________________');
