@@ -9,9 +9,21 @@ class Card {
     }
 }
 
-// for (let i = 0; i < ranks.length; i++){
-//     for (let j = 0; j < suits.length; j++){
-//         const card = new Card(ranks[i], suits[j])
-//         console.log(card)
-//     }
-// }
+class Deck {
+    cardsInDeck: Card[] = []
+    constructor(){
+        for (let i = 0; i < ranks.length; i++){
+            for (let j = 0; j < suits.length; j++){
+                const card = new Card(ranks[i], suits[j])
+                console.log(card)
+                this.cardsInDeck.push(card)
+            }
+        }
+    }
+    showDeck = (): void => {
+        console.log(this.cardsInDeck)
+    }
+}
+
+const deck = new Deck()
+deck.showDeck()
