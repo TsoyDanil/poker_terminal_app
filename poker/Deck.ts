@@ -21,6 +21,7 @@ class Deck {
         this.cardsInDeck.splice(this.cardsInDeck.length - 1, 1)
         return cardHolder
     }
+
     mixDeck(): void {
         this.cardsInDeck.sort(() => Math.random() -0.5)
     }

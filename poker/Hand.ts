@@ -3,6 +3,12 @@ import Deck from "./Deck";
 
 class Hand {
     cardsInHand: Card[] = []
+    constructor(deck: Deck){
+        for (let i = 0; i < 5; i++){
+            const newCard: Card = deck.giveCard()
+            this.cardsInHand.push(newCard)
+        }
+    }
     getCard(deck: Deck): void{
         const newCard: Card = deck.giveCard()
         this.cardsInHand.push(newCard)

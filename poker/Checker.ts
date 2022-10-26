@@ -2,8 +2,8 @@ import Card from "./Card";
 import Deck from "./Deck";
 import Hand from "./Hand";
 class Checker {
-    sameSuit: any
-    sameRanks: any
+    sameSuit: any[] = []
+    sameRanks: any[] = []
     twoSameRank: boolean = false
     threeSameRank: boolean = false
     fourOfSameRank: boolean = false
@@ -11,6 +11,7 @@ class Checker {
     threeOfSameSuit: boolean = false
     fourOfSameSuit: boolean = false
     fiveOfSameSuit: boolean = false
+    fiveInRow: boolean = false
     checkHand(){
 
     }
@@ -132,10 +133,27 @@ class Checker {
         })
         this.sameRanks = finalResult
     }
-    cardsOrder(hand: Hand): void{
+    orderCards(hand: Hand): void{
         let orderedArray = hand.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
         hand.cardsInHand = orderedArray
-        console.log(hand.cardsInHand)
+    }
+    checkForFive(hand: Hand): void{
+        this.orderCards(hand)
+        let counter = 1
+        for (let i = 0; i < hand.cardsInHand.length; i++){
+            if (hand.cardsInHand[i].cardValue + 1=== hand.cardsInHand[i + 1]?.cardValue){
+                counter++
+            }
+        }
+        console.log(counter)
+        if (counter === 5){
+            this.fiveInRow = true
+        } else{
+            this.fiveInRow = false
+        }
+    }
+    checkForSameRanks(hand: Hand): void {
+        
     }
 }
 
