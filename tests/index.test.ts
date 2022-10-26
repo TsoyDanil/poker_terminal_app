@@ -76,6 +76,7 @@ describe ('Check order', () => {
             { rank: 'Q', suit: '♦', cardValue: 7 }
         ]
         checker.cardOfEachSuit(hand)
+        checker.checkForFiveSuits(hand)
         checker.checkForFlush()
         expect(checker.isFlush).toEqual(true)
     })

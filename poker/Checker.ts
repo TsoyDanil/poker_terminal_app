@@ -188,11 +188,16 @@ class Checker {
         }
     }
     checkForFlush(): void{
-        for (let i = 0; i < this.sameSuit.length; i++){
-            if (this.sameSuit[i].amount === 5){
-                this.isFlush = true
-                return
-            }
+        // for (let i = 0; i < this.sameSuit.length; i++){
+        //     if (this.sameSuit[i].amount === 5){
+        //         this.isFlush = true
+        //         return
+        //     }
+        //     this.isFlush = false
+        // }
+        if (this.fiveSuitsInRow){
+            this.isFlush = true
+        } else {
             this.isFlush = false
         }
     }
