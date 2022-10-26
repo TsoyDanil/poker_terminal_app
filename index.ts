@@ -1,7 +1,8 @@
-type valueOfCard = { [key: string]: number }
+type valueOfCardObject = { [key: string]: number }
+type pairOfCards = {[key: string]: number}
 const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 const suits = ["♠", "♥", "♦", "♣"]
-const cardValues: valueOfCard = {
+const cardValues: valueOfCardObject = {
     "2": 2, 
     "3": 3, 
     "4": 4, 
@@ -18,13 +19,13 @@ const cardValues: valueOfCard = {
 }
 
 class Card {
-    rank: string
-    suit: string | undefined
-    cardValue: number
+    public rank: string
+    public suit: string
+    public cardValue: number
     constructor(rank: string, suit: string) {
         this.rank = rank
         this.suit = suit
-        this.cardValue = cardValues[rank]
+        this.cardValue = cardValues[this.rank]
     }
 }
 
@@ -78,18 +79,125 @@ class Checker {
     checkHand(){
 
     }
+    cardOfEachSuit(hand: Hand): pairOfCards[]{
+        let result: pairOfCards[] = []
+        let clubs: number = 0
+        let diamonds: number = 0
+        let hearts: number = 0
+        let spades: number = 0
+        for (let i = 0; i < hand.cardsInHand.length; i++){
+            switch (hand.cardsInHand[i].suit){
+                case "♣":
+                    clubs++
+                    break
+                case "♦": 
+                    diamonds++
+                    break
+                case "♥":
+                    hearts++
+                    break
+                case "♠":
+                    spades++
+                    break
+            }
+        }
+        result.push({"♣": clubs}, {"♦": diamonds}, {"♥": hearts}, {"♠": spades})
+        console.log(result)
+        return result
+    }
+    cardOfEachRank(hand: Hand){
+        let result: pairOfCards[] = []
+        let one: number = 0
+        let two: number = 0
+        let three: number = 0
+        let four: number = 0
+        let five: number = 0
+        let six: number = 0
+        let seven: number = 0
+        let eight: number = 0
+        let nine: number = 0
+        let ten: number = 0
+        let J: number = 0
+        let Q: number = 0
+        let K: number = 0
+        let A: number = 0
+        hand.cardsInHand.forEach(card => {
+            switch (card.rank){
+                case "1": 
+                    one++
+                    break
+                case "2": 
+                    two++
+                    break
+                case "3": 
+                    three++
+                    break
+                case "4": 
+                    four++
+                    break
+                case "5": 
+                    five++
+                    break
+                case "6": 
+                    six++
+                    break
+                case "7": 
+                    seven++
+                    break
+                case "8": 
+                    eight++
+                    break
+                case "9": 
+                    nine++
+                    break
+                case "10": 
+                    ten++
+                    break
+                case "J":
+                    J++
+                    break
+                case "Q": 
+                    Q++
+                    break
+                case "K":
+                    K++
+                    break
+                case "A": 
+                    A++
+                    break
+            }
+        })
+        one > 1 ? result.push({'1': one}) : ''
+        two > 1 ? result.push({'2': two}) : ''
+        three > 1 ? result.push({'3': three}) : ''
+        four > 1 ? result.push({'4': four}) : ''
+        five > 1 ? result.push({'5': five}) : ''
+        six > 1 ? result.push({'6': six}) : ''
+        seven > 1 ? result.push({'7': seven}) : ''
+        eight > 1 ? result.push({'8': eight}) : ''
+        nine > 1 ? result.push({'9': nine}) : ''
+        ten > 1 ? result.push({'10': ten}) : ''
+        J > 1 ? result.push({'J': J}) : ''
+        Q > 1 ? result.push({'Q': Q}) : ''
+        K > 1 ? result.push({'K': K}) : ''
+        A > 1 ? result.push({'A': A}) : ''
+        console.log(result)
+    }
 }
 
 const deck = new Deck()
-
 const hand = new Hand()
-
+const checker = new Checker()
+deck.mixDeck()
 hand.getCard(deck)
 hand.getCard(deck)
 hand.getCard(deck)
 hand.getCard(deck)
 hand.getCard(deck)
 hand.showHand()
+checker.cardOfEachSuit(hand)
+checker.cardOfEachRank(hand)
+
 
 
 
