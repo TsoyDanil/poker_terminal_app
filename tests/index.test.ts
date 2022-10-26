@@ -17,15 +17,67 @@ describe ('Check order', () => {
             { rank: '6', suit: '♦', cardValue: 6 },
             { rank: '7', suit: '♦', cardValue: 7 }
         ]
-        checker.checkForFive(hand)
-        expect(checker.fiveInRow).toEqual(true)
+        checker.checkForFiveRanks(hand)
+        expect(checker.fiveRanksInRow).toEqual(true)
+    })
+    test('Check for five same suits in a row', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♦', cardValue: 3 },
+            { rank: '4', suit: '♦', cardValue: 4 },
+            { rank: '5', suit: '♦', cardValue: 5 },
+            { rank: '6', suit: '♦', cardValue: 6 },
+            { rank: '7', suit: '♦', cardValue: 7 }
+        ]
+        checker.checkForFiveSuits(hand)
+        expect(checker.fiveSuitsInRow).toEqual(true)
+    })
+    test('Check for pair', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♦', cardValue: 3 },
+            { rank: '3', suit: '♠', cardValue: 3 },
+            { rank: '5', suit: '♦', cardValue: 5 },
+            { rank: '6', suit: '♦', cardValue: 6 },
+            { rank: '7', suit: '♦', cardValue: 7 }
+        ]
+        checker.cardOfEachRank(hand)
+        checker.checkForPair()
+        expect(checker.isPair).toEqual(true)
+    })
+    test('Check for triple', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♦', cardValue: 3 },
+            { rank: '3', suit: '♠', cardValue: 3 },
+            { rank: '3', suit: '♣', cardValue: 3 },
+            { rank: '6', suit: '♦', cardValue: 6 },
+            { rank: '7', suit: '♦', cardValue: 7 }
+        ]
+        checker.cardOfEachRank(hand)
+        checker.checkForTriple()
+        expect(checker.isTriple).toEqual(true)
+    })
+    test('Check for care', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♦', cardValue: 3 },
+            { rank: '3', suit: '♠', cardValue: 3 },
+            { rank: '3', suit: '♣', cardValue: 3 },
+            { rank: '3', suit: '♥', cardValue: 3 },
+            { rank: '7', suit: '♦', cardValue: 7 }
+        ]
+        checker.cardOfEachRank(hand)
+        checker.checkForCare()
+        expect(checker.isCare).toEqual(true)
+    })
+    test('Check for flush', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♦', cardValue: 3 },
+            { rank: '9', suit: '♦', cardValue: 3 },
+            { rank: 'K', suit: '♦', cardValue: 3 },
+            { rank: 'A', suit: '♦', cardValue: 3 },
+            { rank: 'Q', suit: '♦', cardValue: 7 }
+        ]
+        checker.cardOfEachSuit(hand)
+        checker.checkForFlush()
+        expect(checker.isFlush).toEqual(true)
     })
 })
 
-// describe('Check desk', () => {
-//     test(`Cards creation`, () => {
-//         const deck = new Deck()
-//         deck.createCards()
-//         expect(deck.cards).toEqual(cards)
-//     })
-// })

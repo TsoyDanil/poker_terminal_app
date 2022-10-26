@@ -26,6 +26,8 @@ class Hand {
     changeCard(cardNum: number, deck: Deck): void {
         this.cardsInHand.splice(cardNum - 1, 1)
         this.getCard(deck)
+        let orderedArray = this.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
+        this.cardsInHand = orderedArray
     }
 }
 
