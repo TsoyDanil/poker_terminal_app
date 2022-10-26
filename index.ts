@@ -1,11 +1,30 @@
+type valueOfCard = { [key: string]: number }
 const ranks = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 const suits = ["♠", "♥", "♦", "♣"]
+const cardValues: valueOfCard = {
+    "2": 2, 
+    "3": 3, 
+    "4": 4, 
+    "5": 5, 
+    "6": 6, 
+    "7": 7, 
+    "8": 8, 
+    "9": 9, 
+    "10": 10,
+    "J": 11, 
+    "Q": 12, 
+    "K": 13, 
+    "A": 14, 
+}
+
 class Card {
     rank: string
-    suit: string
+    suit: string | undefined
+    cardValue: number
     constructor(rank: string, suit: string) {
         this.rank = rank
         this.suit = suit
+        this.cardValue = cardValues[rank]
     }
 }
 
@@ -55,8 +74,13 @@ class Hand {
     }
 }
 
+class Checker {
+    checkHand(){
+
+    }
+}
+
 const deck = new Deck()
-deck.mixDeck()
 
 const hand = new Hand()
 
@@ -66,6 +90,8 @@ hand.getCard(deck)
 hand.getCard(deck)
 hand.getCard(deck)
 hand.showHand()
+
+
 
 
 
