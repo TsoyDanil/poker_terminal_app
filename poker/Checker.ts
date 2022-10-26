@@ -134,7 +134,8 @@ class Checker {
     }
     cardsOrder(hand: Hand): void{
         let orderedArray = hand.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
-        console.log(orderedArray)
+        hand.cardsInHand = orderedArray
+        console.log(hand.cardsInHand)
     }
 }
 
