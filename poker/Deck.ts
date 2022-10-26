@@ -17,9 +17,8 @@ class Deck {
         console.log(this.cardsInDeck)
     }
     giveCard(): Card {
-        let randNum: number = Math.floor(Math.random()*this.cardsInDeck.length)
-        const cardHolder: Card = this.cardsInDeck[randNum]
-        this.cardsInDeck.splice(randNum, 1)
+        const cardHolder: Card = this.cardsInDeck[this.cardsInDeck.length - 1]
+        this.cardsInDeck.splice(this.cardsInDeck.length - 1, 1)
         return cardHolder
     }
     mixDeck(): void {

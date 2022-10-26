@@ -2,6 +2,8 @@ import Card from "./Card";
 import Deck from "./Deck";
 import Hand from "./Hand";
 class Checker {
+    sameSuit: any
+    sameRanks: any
     twoSameRank: boolean = false
     threeSameRank: boolean = false
     fourOfSameRank: boolean = false
@@ -9,8 +11,6 @@ class Checker {
     threeOfSameSuit: boolean = false
     fourOfSameSuit: boolean = false
     fiveOfSameSuit: boolean = false
-    sameSuit: any
-    sameRanks: any
     checkHand(){
 
     }
@@ -133,7 +133,7 @@ class Checker {
         this.sameRanks = finalResult
     }
     cardsOrder(hand: Hand): void{
-        let orderedArray = hand.cardsInHand.sort((a: any, b: any) => a - b);
+        let orderedArray = hand.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
         console.log(orderedArray)
     }
 }
