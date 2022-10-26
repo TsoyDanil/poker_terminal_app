@@ -76,11 +76,17 @@ class Hand {
 }
 
 class Checker {
+    sameRanks: valueOfCardObject | undefined
+    sameSuit: valueOfCardObject
+    constructor(hand: Hand){
+        this.sameSuit = this.cardOfEachSuit(hand)
+        this.sameRanks = this.cardOfEachRank(hand)
+    }
     checkHand(){
 
     }
-    cardOfEachSuit(hand: Hand): pairOfCards[]{
-        let result: pairOfCards[] = []
+    cardOfEachSuit(hand: Hand): valueOfCardObject{
+        let result: valueOfCardObject | undefined 
         let clubs: number = 0
         let diamonds: number = 0
         let hearts: number = 0
@@ -101,12 +107,16 @@ class Checker {
                     break
             }
         }
-        result.push({"♣": clubs}, {"♦": diamonds}, {"♥": hearts}, {"♠": spades})
-        console.log(result)
+        result =  {
+            "♣": clubs, 
+            "♦": diamonds, 
+            "♥": hearts, 
+            "♠": spades
+        }
         return result
     }
-    cardOfEachRank(hand: Hand){
-        let result: pairOfCards[] = []
+    cardOfEachRank(hand: Hand): valueOfCardObject{
+        let result: any
         let one: number = 0
         let two: number = 0
         let three: number = 0
@@ -167,39 +177,34 @@ class Checker {
                     break
             }
         })
-        one > 1 ? result.push({'1': one}) : ''
-        two > 1 ? result.push({'2': two}) : ''
-        three > 1 ? result.push({'3': three}) : ''
-        four > 1 ? result.push({'4': four}) : ''
-        five > 1 ? result.push({'5': five}) : ''
-        six > 1 ? result.push({'6': six}) : ''
-        seven > 1 ? result.push({'7': seven}) : ''
-        eight > 1 ? result.push({'8': eight}) : ''
-        nine > 1 ? result.push({'9': nine}) : ''
-        ten > 1 ? result.push({'10': ten}) : ''
-        J > 1 ? result.push({'J': J}) : ''
-        Q > 1 ? result.push({'Q': Q}) : ''
-        K > 1 ? result.push({'K': K}) : ''
-        A > 1 ? result.push({'A': A}) : ''
-        console.log(result)
+        one > 1 ? result['1'] = one : ''
+        two > 1 ? result['2'] = two : ''
+        three > 1 ? result['3'] = three : ''
+        four > 1 ? result['4'] = four : ''
+        five > 1 ? result['5'] = five : ''
+        six > 1 ? result['6'] = six : ''
+        seven > 1 ? result['7'] = seven : ''
+        eight > 1 ? result['8'] = eight : ''
+        nine > 1 ? result['9'] = nine : ''
+        ten > 1 ? result['10'] = ten : ''
+        J > 1 ? result['J'] = J : ''
+        Q > 1 ? result['Q'] = Q : ''
+        K > 1 ? result['K'] = K : ''
+        A > 1 ? result['A'] = A : ''
+        return result
     }
 }
 
 const deck = new Deck()
 const hand = new Hand()
-const checker = new Checker()
 deck.mixDeck()
 hand.getCard(deck)
 hand.getCard(deck)
 hand.getCard(deck)
 hand.getCard(deck)
 hand.getCard(deck)
+const checker = new Checker(hand)
 hand.showHand()
 checker.cardOfEachSuit(hand)
-checker.cardOfEachRank(hand)
-
-
-
-
-
-
+console.log(checker.sameSuit)
+console.log(checker.sameRanks)
