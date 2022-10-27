@@ -14,6 +14,8 @@ class Hand {
         this.cardsInHand.push(newCard)
     }
     showHand(): void {
+        let orderedArray = this.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
+        this.cardsInHand = orderedArray
         if (this.cardsInHand.length > 0){
             for (let i = 0; i < this.cardsInHand.length; i++){
                 let cardNumber: number = i + 1
@@ -24,10 +26,7 @@ class Hand {
         }
     }
     changeCard(cardNum: number, deck: Deck): void {
-        this.cardsInHand.splice(cardNum - 1, 1)
-        this.getCard(deck)
-        let orderedArray = this.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
-        this.cardsInHand = orderedArray
+        this.cardsInHand[cardNum] = deck.giveCard()
     }
 }
 

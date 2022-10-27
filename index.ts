@@ -3,15 +3,7 @@ import Card from "./poker/Card"
 import Deck from "./poker/Deck"
 import Hand from "./poker/Hand"
 import Checker from "./poker/Checker"
+import Application from "./poker/Application"
 
-const deck = new Deck()
-deck.mixDeck()
-const hand = new Hand(deck)
-const checker = new Checker()
-checker.cardOfEachSuit(hand)
-checker.cardOfEachRank(hand)
-hand.showHand()
-checker.orderCards(hand)
-checker.cardOfEachRank(hand)
-checker.cardOfEachSuit(hand)
-console.log(checker.sameRanks)
+const application = new Application()
+application.statGame()

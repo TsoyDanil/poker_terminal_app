@@ -14,7 +14,24 @@ class Checker {
     isStraight: boolean = false
     isStraightFlush: boolean = false
     isRoyalFlush: boolean = false
-    checkHand(){
+    checkHand(hand: Hand){
+        this.orderCards(hand)
+        this.cardOfEachRank(hand)
+        this.cardOfEachRank(hand)
+        this.checkForFiveRanks(hand)
+        this.checkForFiveSuits()
+        this.checkForPair()
+        this.checkForTwoPair()
+        this.checkForTriple()
+        this.checkForCare()
+        this.checkForFlush()
+        this.checkForStraight()
+        this.checkForStraightFlush()
+        this.checkForRoyalFlush(hand)
+    }
+    orderCards(hand: Hand): void{
+        let orderedArray = hand.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
+        hand.cardsInHand = orderedArray
     }
     cardOfEachSuit(hand: Hand): void{
         let clubs: number = 0
@@ -133,10 +150,6 @@ class Checker {
             obj.amount > 1 ? finalResult.push(obj) : ''
         })
         this.sameRanks = finalResult
-    }
-    orderCards(hand: Hand): void{
-        let orderedArray = hand.cardsInHand.sort((a: any, b: any) => a.cardValue - b.cardValue);
-        hand.cardsInHand = orderedArray
     }
     checkForFiveRanks(hand: Hand): void{
         this.orderCards(hand)
