@@ -211,9 +211,9 @@ class Checker {
         }
     }
     checkForFullHouse(): void{
-        if ((this.sameRanks[0].amount === 2 && this.sameRanks[1].amount === 3) || (this.sameRanks[0].amount === 3 && this.sameRanks[1].amount === 2)){
+        if ((this.sameRanks[0]?.amount === 2 && this.sameRanks[1]?.amount === 3) || (this.sameRanks[0]?.amount === 3 && this.sameRanks[1]?.amount === 2)){
             this.isFullHouse = true
-        }
+        } 
     }
     checkForFlush(): void{
         if (this.fiveSuitsInRow){
