@@ -11,6 +11,7 @@ class Checker {
     isTriple: boolean = false
     isCare: boolean = false
     isFlush: boolean = false
+    isFullHouse: boolean = false
     isStraight: boolean = false
     isStraightFlush: boolean = false
     isRoyalFlush: boolean = false
@@ -23,6 +24,7 @@ class Checker {
         this.checkForPair()
         this.checkForTwoPair()
         this.checkForTriple()
+        this.checkForFullHouse()
         this.checkForCare()
         this.checkForFlush()
         this.checkForStraight()
@@ -206,6 +208,11 @@ class Checker {
                 return
             }
             this.isCare = false
+        }
+    }
+    checkForFullHouse(): void{
+        if ((this.sameRanks[0].amount === 2 && this.sameRanks[1].amount === 3) || (this.sameRanks[0].amount === 3 && this.sameRanks[1].amount === 2)){
+            this.isFullHouse = true
         }
     }
     checkForFlush(): void{

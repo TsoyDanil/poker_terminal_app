@@ -15,7 +15,7 @@ class Application {
         const hand = new Hand(deck)
         const checker = new Checker()
         hand.showHand()
-        readline.question('Would you like to change cards? Type "yes" if you want. Anything else if you don`t', (input: string) => {
+        readline.question('Would you like to change cards? Type "yes" if you want. Press enter if you don`t', (input: string) => {
             if (input.trim() === 'yes') {
                 readline.question('Choose cards to change. Type only numbers', (input: string) => {
                     let numArray: number[] = []
@@ -30,8 +30,8 @@ class Application {
                         console.log(hand.cardsInHand[numArray[i]-1])
                         hand.changeCard((numArray[i]-1), deck)
                     }
-                    hand.showHand()
                     console.log('You changed hand')
+                    hand.showHand()
                     console.log('Here is your combo:');
                     checker.checkHand(hand)
                     if (checker.isRoyalFlush){
@@ -40,6 +40,8 @@ class Application {
                         console.log('Straight Flush. It gives you 9 points')
                     } else if (checker.isCare){
                         console.log('Care. It gives you 8 points')
+                    } else if (checker.isFullHouse){
+                        console.log('Full house. It gives you 7 points')
                     }else if (checker.isFlush){
                         console.log('Flush. It gives you 6 points')
                     } else if (checker.isStraight){
@@ -51,9 +53,9 @@ class Application {
                     } else if (checker.isPair){
                         console.log('Pair. It gives you 2 points')
                     } else {
-                        console.log('Ummm, sorry bit no combo was found, but at least you tried. You get 1 points')                        
+                        console.log('Sorry but no combo was found, but at least you tried. You get 1 points')                        
                     }
-                    readline.question('Another one? Type "yes" if you would like. Anything else if you don`t', (input: string) =>{
+                    readline.question('Another one? Type "yes" if you would like. Enter if you don`t', (input: string) =>{
                         if (input.trim() === 'yes'){
                             this.statGame()
                         } else{
@@ -74,7 +76,10 @@ class Application {
                     
                 } else if (checker.isCare){
                     console.log('Care. It gives you 8 points')
-                }else if (checker.isFlush){
+                } else if (checker.isFullHouse){
+                    console.log('Full house. It gives you 7 points')
+                }
+                else if (checker.isFlush){
                     console.log('Flush. It gives you 6 points')
                     
                 } else if (checker.isStraight){
@@ -90,11 +95,11 @@ class Application {
                     console.log('Pair. It gives you 2 points')
                     
                 } else {
-                    console.log('Ummm, sorry bit no combo was found, but at least you tried. You get 1 points')
+                    console.log('Sorry but no combo was found, but at least you tried. You get 1 points')
                     
                 }
             }
-            readline.question('Another one? Type "yes" if you would like. Anything else if you don`t', (input: string) =>{
+            readline.question('Another one? Type "yes" if you would like. Enter if you don`t', (input: string) =>{
                 if (input.trim() === 'yes'){
                     this.statGame()
                 } else{
@@ -105,23 +110,5 @@ class Application {
         })
     }
 }
-
-// readline.question('Choose cards', (input: string) => {
-//     console.log(input)
-//     if (input === 'yes') {
-//         readline.question('play again?', (input2: string) => {
-//             if (input2 === 'yes'){
-//                 console.log(input2)
-//                 this.action()
-//             } else {
-//                 readline.close()
-//             }
-//         })
-//     } else {
-//         console.log(input)
-//         readline.close()
-//     }
-//     // readline.close()
-// })
 
 export default Application

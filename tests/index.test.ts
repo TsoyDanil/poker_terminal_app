@@ -33,6 +33,7 @@ describe ('Check order', () => {
         checker.checkForFiveSuits()
         expect(checker.fiveSuitsInRow).toEqual(true)
     })
+
     test('Check for pair', () => {
         hand.cardsInHand = [
             { rank: '3', suit: '♦', cardValue: 3 },
@@ -45,6 +46,7 @@ describe ('Check order', () => {
         checker.checkForPair()
         expect(checker.isPair).toEqual(true)
     })
+
     test('Check for two pair', () => {
         hand.cardsInHand = [
             { rank: '3', suit: '♦', cardValue: 3 },
@@ -57,6 +59,7 @@ describe ('Check order', () => {
         checker.checkForTwoPair()
         expect(checker.isTwoPair).toEqual(true)
     })
+
     test('Check for triple', () => {
         hand.cardsInHand = [
             { rank: '3', suit: '♦', cardValue: 3 },
@@ -69,6 +72,20 @@ describe ('Check order', () => {
         checker.checkForTriple()
         expect(checker.isTriple).toEqual(true)
     })
+
+    test('Check for full house', () => {
+        hand.cardsInHand = [
+            { rank: '7', suit: '♦', cardValue: 3 },
+            { rank: '7', suit: '♠', cardValue: 3 },
+            { rank: '3', suit: '♣', cardValue: 3 },
+            { rank: '3', suit: '♥', cardValue: 7 },
+            { rank: '3', suit: '♦', cardValue: 7 }
+        ]
+        checker.cardOfEachRank(hand)
+        checker.checkForFullHouse()
+        expect(checker.isFullHouse).toEqual(true)
+    })
+
     test('Check for care', () => {
         hand.cardsInHand = [
             { rank: '3', suit: '♦', cardValue: 3 },
