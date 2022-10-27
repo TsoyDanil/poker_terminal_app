@@ -7,9 +7,13 @@ class Checker {
     fiveRanksInRow: boolean = false
     fiveSuitsInRow: boolean = false
     isPair: boolean = false
+    isTwoPair: boolean = false
     isTriple: boolean = false
     isCare: boolean = false
     isFlush: boolean = false
+    isStraight: boolean = false
+    isStraightFlush: boolean = false
+    isRoyalFlush: boolean = false
     checkHand(){
     }
     cardOfEachSuit(hand: Hand): void{
@@ -149,17 +153,12 @@ class Checker {
             this.fiveRanksInRow = false
         }
     }
-    checkForFiveSuits(hand: Hand): void{
-        let counter: number = 1
-        for (let i = 0; i < hand.cardsInHand.length; i++){
-            if (hand.cardsInHand[i].suit === hand.cardsInHand[i+1]?.suit){
-                counter++
+    checkForFiveSuits(): void{
+        for (let i = 0; i < this.sameSuit.length; i++){
+            if (this.sameSuit[i].amount === 5){
+                this.fiveSuitsInRow = true
+                return
             }
-        }
-        if (counter === 5){
-            this.fiveSuitsInRow = true
-        } else{
-            this.fiveSuitsInRow = false
         }
     }
     checkForPair():void{
@@ -168,6 +167,15 @@ class Checker {
         } else {
             this.isPair = false
         }
+    }
+    checkForTwoPair():void{
+        let counter: number = 0
+        for (let i = 0; i < this.sameRanks.length; i++){
+            if (this.sameRanks[i].amount === 2){
+                counter++
+            }
+        }
+        counter === 2 ? this.isTwoPair = true : this.isTwoPair = false
     }
     checkForTriple(): void{
         for (let i = 0; i < this.sameRanks.length; i++){
@@ -188,17 +196,26 @@ class Checker {
         }
     }
     checkForFlush(): void{
-        // for (let i = 0; i < this.sameSuit.length; i++){
-        //     if (this.sameSuit[i].amount === 5){
-        //         this.isFlush = true
-        //         return
-        //     }
-        //     this.isFlush = false
-        // }
         if (this.fiveSuitsInRow){
             this.isFlush = true
         } else {
             this.isFlush = false
+        }
+    }
+    checkForStraight(): void{
+        if (this.fiveRanksInRow){
+            this.isStraight = true
+        }
+    }
+    checkForStraightFlush(): void{
+        if (this.fiveRanksInRow && this.fiveSuitsInRow){
+            this.isStraightFlush = true
+        }
+    }
+    checkForRoyalFlush(hand: Hand): void{
+        this.orderCards(hand)
+        if (hand.cardsInHand[0].cardValue === 10 && this.fiveRanksInRow && this.fiveSuitsInRow){
+            this.isRoyalFlush = true
         }
     }
 }

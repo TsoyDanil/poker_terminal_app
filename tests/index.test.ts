@@ -9,7 +9,7 @@ const hand = new Hand(deck)
 const checker = new Checker()
 
 describe ('Check order', () => {
-    test('Check for Five in a row', () => {
+    test('Check for five ranks in a row', () => {
         hand.cardsInHand = [
             { rank: '3', suit: '♦', cardValue: 3 },
             { rank: '4', suit: '♠', cardValue: 4 },
@@ -20,6 +20,7 @@ describe ('Check order', () => {
         checker.checkForFiveRanks(hand)
         expect(checker.fiveRanksInRow).toEqual(true)
     })
+
     test('Check for five same suits in a row', () => {
         hand.cardsInHand = [
             { rank: '3', suit: '♦', cardValue: 3 },
@@ -28,7 +29,8 @@ describe ('Check order', () => {
             { rank: '6', suit: '♦', cardValue: 6 },
             { rank: '7', suit: '♦', cardValue: 7 }
         ]
-        checker.checkForFiveSuits(hand)
+        checker.cardOfEachSuit(hand)
+        checker.checkForFiveSuits()
         expect(checker.fiveSuitsInRow).toEqual(true)
     })
     test('Check for pair', () => {
@@ -42,6 +44,18 @@ describe ('Check order', () => {
         checker.cardOfEachRank(hand)
         checker.checkForPair()
         expect(checker.isPair).toEqual(true)
+    })
+    test('Check for two pair', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♦', cardValue: 3 },
+            { rank: '3', suit: '♠', cardValue: 3 },
+            { rank: '5', suit: '♦', cardValue: 5 },
+            { rank: '5', suit: '♠', cardValue: 6 },
+            { rank: '7', suit: '♦', cardValue: 7 }
+        ]
+        checker.cardOfEachRank(hand)
+        checker.checkForTwoPair()
+        expect(checker.isTwoPair).toEqual(true)
     })
     test('Check for triple', () => {
         hand.cardsInHand = [
@@ -76,9 +90,47 @@ describe ('Check order', () => {
             { rank: 'Q', suit: '♦', cardValue: 7 }
         ]
         checker.cardOfEachSuit(hand)
-        checker.checkForFiveSuits(hand)
+        checker.checkForFiveSuits()
         checker.checkForFlush()
         expect(checker.isFlush).toEqual(true)
+    })
+    test('Check for straight', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♦', cardValue: 3 },
+            { rank: '4', suit: '♠', cardValue: 4 },
+            { rank: '5', suit: '♥', cardValue: 5 },
+            { rank: '6', suit: '♦', cardValue: 6 },
+            { rank: '7', suit: '♦', cardValue: 7 }
+        ]
+        checker.checkForFiveRanks(hand)
+        checker.checkForStraight()
+        expect(checker.isStraight).toEqual(true)
+    })
+    test('Check for straight flush', () => {
+        hand.cardsInHand = [
+            { rank: '3', suit: '♠', cardValue: 3 },
+            { rank: '4', suit: '♠', cardValue: 4 },
+            { rank: '5', suit: '♠', cardValue: 5 },
+            { rank: '6', suit: '♠', cardValue: 6 },
+            { rank: '7', suit: '♠', cardValue: 7 }
+        ]
+        checker.checkForFiveRanks(hand)
+        checker.checkForFiveSuits()
+        checker.checkForStraightFlush()
+        expect(checker.isStraightFlush).toEqual(true)
+    })
+    test('Check for royal flush', () => {
+        hand.cardsInHand = [
+            { rank: '10', suit: '♦', cardValue: 10 },
+            { rank: 'J', suit: '♦', cardValue: 11 },
+            { rank: 'Q', suit: '♦', cardValue: 12 },
+            { rank: 'K', suit: '♦', cardValue: 13 },
+            { rank: 'A', suit: '♦', cardValue: 14}
+        ]
+        checker.checkForFiveSuits()
+        checker.checkForFiveRanks(hand)
+        checker.checkForRoyalFlush(hand)
+        expect(checker.isRoyalFlush).toEqual(true)
     })
 })
 
