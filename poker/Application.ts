@@ -27,10 +27,14 @@ class Application {
                         }
                     }
                     for (let i = 0; i < numArray.length; i++){
-                        console.log(hand.cardsInHand[numArray[i]-1])
-                        hand.changeCard((numArray[i]-1), deck)
+                        if (numArray[i] <= 5){
+                            console.log(hand.cardsInHand[numArray[i]-1])
+                            hand.changeCard((numArray[i]-1), deck)
+                        } else {
+                            console.log(`Card number ${numArray[i]}: invalid card number`)
+                        }
                     }
-                    console.log('You changed hand')
+                    console.log('You current hand:')
                     hand.showHand()
                     console.log('Here is your combo:');
                     checker.checkHand(hand)
